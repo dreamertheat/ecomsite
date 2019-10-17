@@ -28,6 +28,6 @@ public class IndexController {
 			map.put("about", "some text about");
 			view.addAllObjects(map);
 			return view;
-		}
+	}
 	
 }
