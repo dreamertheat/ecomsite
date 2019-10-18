@@ -1,5 +1,12 @@
 package ecomsite.java.dbmodels;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+@Service("UsersModel")
 public class UsersModel {
 	
 	private int _id;
@@ -8,20 +15,27 @@ public class UsersModel {
 	private String address;
 	private String birthdate;
 	private int enabled;
+	private String notes;
 	
 	public UsersModel() {
 		
 	}
 	
 	
-	public UsersModel(String first_name, String last_name, String address, String birthdate, int enabled) {
-		super();
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.address = address;
-		this.birthdate = birthdate;
-		this.enabled = enabled;
+	
+	public String getNotes() {
+		return notes;
 	}
+
+
+	@Autowired
+	@Qualifier("user")
+	public void setNotes(@Value("${commons.corporation}")String notes) {
+		this.notes = notes;
+	}
+
+
+
 	public String getFirst_name() {
 		return first_name;
 	}
@@ -46,6 +60,18 @@ public class UsersModel {
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
+	public int get_id() {
+		return _id;
+	}
+
+
+
+	public void set_id(int _id) {
+		this._id = _id;
+	}
+
+
+
 	public int getEnabled() {
 		return enabled;
 	}

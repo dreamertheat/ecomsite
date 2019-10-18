@@ -9,6 +9,8 @@
 <title>About</title>
 </head>
 <body>
- <c:out value="${about}"></c:out>
+ <c:out value="${about}"></c:out><br>
+ <c:out value="${corporation}"></c:out><br>
+
 </body>
 </html>
