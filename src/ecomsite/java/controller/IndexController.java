@@ -13,13 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ecomsite.java.dbmodels.UsersModel;
+import ecomsite.java.services.AboutService;
 
 @Controller
 public class IndexController {
 	
 	private UsersModel model;
+	private AboutService service;
 	
-	
+	@Autowired
+	public void setService(AboutService service) {
+		this.service = service;
+	}
+
 	@Autowired
 	public void setModel(UsersModel model) {
 		this.model = model;
@@ -35,9 +41,10 @@ public class IndexController {
 	public ModelAndView about() {
 		
 		ModelAndView view = new ModelAndView("about");
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("about", "some text about");
 		map.put("corporation", "model "+model.getNotes());
+		map.put("service", service.getModels());
 		view.addAllObjects(map);
 		return view;
 	

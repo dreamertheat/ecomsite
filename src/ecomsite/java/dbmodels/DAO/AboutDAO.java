@@ -31,11 +31,11 @@ public class AboutDAO {
 			@Override
 			public AboutModel mapRow(ResultSet rs, int rowNum) throws SQLException {
 				AboutModel mod = new AboutModel();
-				mod.set_id(rs.getInt(0));
-				mod.setName(rs.getString(1));
-				mod.setDescription(rs.getString(2));
-				mod.setSequence(rs.getInt(3));
-				mod.setDate(rs.getString(4));
+				mod.set_id(rs.getInt(1));
+				mod.setName(rs.getString(2));
+				mod.setDescription(rs.getString(3));
+				mod.setSequence(rs.getInt(4));
+				mod.setDate(rs.getString(5));
 				return mod;
 			}
 		});

@@ -30,11 +30,11 @@ public class UsersDAO {
 			public UsersModel mapRow(ResultSet rs, int rowNum) throws SQLException {
 				// TODO Auto-generated method stub
 				UsersModel mod = new UsersModel();
-				mod.set_id(rs.getInt(0));
-				mod.setFirst_name(rs.getString(1));
-				mod.setLast_name(rs.getString(2));
-				mod.setAddress(rs.getString(3));
-				mod.setBirthdate(rs.getString(4));
+				mod.set_id(rs.getInt(1));
+				mod.setFirst_name(rs.getString(2));
+				mod.setLast_name(rs.getString(3));
+				mod.setAddress(rs.getString(4));
+				mod.setBirthdate(rs.getString(5));
 				return mod;
 			}
 			

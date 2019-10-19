@@ -9,11 +9,13 @@
 	<context:component-scan
 		base-package="ecomsite.java.dbmodels.DAO" annotation-config="true">
 	</context:component-scan>
+	<context:component-scan
+		base-package="ecomsite.java.services" annotation-config="true">
+	</context:component-scan>
 	
 	<context:property-placeholder
 		location="classpath:ecomsite/file/properties/commons.properties" />
-	<context:property-placeholder
-		location="classpath:ecomsite/file/properties/database.properties" />
+	
 		
 	<context:annotation-config></context:annotation-config>
 
@@ -21,9 +23,9 @@
 	<bean id="dataSource"
 		class="org.apache.tomcat.dbcp.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="${commons.corporation}"></property>
-		<property name="url" value="${commons.corporation}"></property>
-		<property name="username" value="${commons.corporation}"></property>
-		<property name="password" value="${commons.corporation}"></property>
+		<property name="driverClassName" value="${db.driver}"></property>
+		<property name="url" value="${db.url}"></property>
+		<property name="username" value="${db.username}"></property>
+		<property name="password" value="${db.password}"></property>
 	</bean>
 </beans>

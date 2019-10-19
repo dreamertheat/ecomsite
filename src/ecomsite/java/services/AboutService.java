@@ -1,0 +1,38 @@
+package ecomsite.java.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ecomsite.java.dbmodels.AboutModel;
+import ecomsite.java.dbmodels.DAO.AboutDAO;
+
+@Service
+public class AboutService {
+	
+	private AboutDAO aboutdao;
+	
+	
+	
+	@Autowired
+	public AboutService(AboutDAO aboutdao) {
+		this.aboutdao = aboutdao;
+	}
+
+	public AboutDAO getAboutdao() {
+		return aboutdao;
+	}
+
+	public void setAboutdao(AboutDAO aboutdao) {
+		this.aboutdao = aboutdao;
+	}
+
+	
+	public List<AboutModel> getModels(){
+		
+		return aboutdao.getModels();
+	}
+	
+	
+}
