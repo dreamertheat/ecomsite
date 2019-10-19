@@ -10,6 +10,7 @@
 		<config>WebContent/WEB-INF/index_master-servlet.xml</config>
 		<config>src/ecomsite/xml/beans/dao_bean.xml</config>
 		<config>src/ecomsite/xml/beans/service_bean.xml</config>
+		<config>src/ecomsite/xml/beans/security_bean.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
