@@ -1,0 +1,13 @@
+body {
+  background-color: lightblue;
+}
+#label{
+	
+	font-size: 30px;
+	color: blue;
+}
+
+#error{
+	font-family:monospace;
+	color:red;
+}

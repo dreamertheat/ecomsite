@@ -7,6 +7,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>About</title>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/static/common.css" type="text/css" >
 </head>
 <body>
  <x:out value="${about}"></x:out><br>
