@@ -32,6 +32,14 @@ public class IndexController {
 		session.setAttribute("time", "" + new Timestamp(new Date().getTime()));
 		return "index";
 	}
+	
+	@RequestMapping("/spring_security_login")
+	public String authorizer(HttpSession session) {
+		session.setAttribute("time", "" + new Timestamp(new Date().getTime()));
+		return "authority";
+	}
+	
+	
 
 	@RequestMapping("/about")
 	public ModelAndView about() {
