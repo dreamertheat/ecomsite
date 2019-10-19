@@ -12,15 +12,16 @@
 </head>
 <body>
 
-<form method="post" action="index.html">
+<form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
 <div class="box">
 <h1>Authorization Required</h1>
 
-<input type="email" name="email" value="email" onFocus="field_focus(this, 'email');" onblur="field_blur(this, 'email');" class="email" />
+<input type="text" name="j_username" placeholder="username" onFocus="field_focus(this, 'email');" onblur="field_blur(this, 'email');" class="email" />
   
-<input type="password" name="email" value="email" onFocus="field_focus(this, 'email');" onblur="field_blur(this, 'email');" class="email" />
-  
-
+<input type="password" name="j_password" placeholder="password" onFocus="field_focus(this, 'email');" onblur="field_blur(this, 'email');" class="email" />
+ 
+ <input  class="btn" type="submit" name="login" value="login"/>
+ 
   
 </div> 
   

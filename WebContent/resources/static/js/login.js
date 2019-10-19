@@ -1,16 +1,16 @@
-function field_focus(field, email)
+function field_focus(field, field2)
   {
-    if(field.value == email)
+    if(field.value == field2)
     {
       field.value = '';
     }
   }
 
-  function field_blur(field, email)
+  function field_blur(field, field2)
   {
     if(field.value == '')
     {
-      field.value = email;
+      field.value = field2;
     }
   }
 
