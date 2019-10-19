@@ -1,11 +1,5 @@
 package ecomsite.java.dbmodels;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
-@Service("UsersModel")
 public class UsersModel {
 	
 	private int _id;
@@ -27,9 +21,7 @@ public class UsersModel {
 	}
 
 
-	@Autowired
-	@Qualifier("user")
-	public void setNotes(@Value("${commons.corporation}")String notes) {
+	public void setNotes(String notes) {
 		this.notes = notes;
 	}
 

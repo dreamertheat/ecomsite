@@ -9,8 +9,8 @@
 <title>About</title>
 </head>
 <body>
- <c:out value="${about}"></c:out><br>
- <c:out value="${corporation}"></c:out><br>
+ <x:out value="${about}"></x:out><br>
+ <x:out value="${corporation}"></x:out><br>
 
 <table style="border: solid 1px">
 

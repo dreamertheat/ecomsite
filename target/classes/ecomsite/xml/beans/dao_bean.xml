@@ -10,6 +10,9 @@
 		base-package="ecomsite.java.dbmodels.DAO" annotation-config="true">
 	</context:component-scan>
 	<context:component-scan
+		base-package="ecomsite.java.dbmodels.dbmodels" annotation-config="true">
+	</context:component-scan>
+	<context:component-scan
 		base-package="ecomsite.java.services" annotation-config="true">
 	</context:component-scan>
 	

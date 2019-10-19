@@ -18,7 +18,8 @@ import ecomsite.java.dbmodels.AboutModel;
 public class AboutDAO {
 	
 	JdbcTemplate jdbc;
-	
+	@Autowired
+	AboutModel mod;
 	@Autowired
 	public void setJdbc(DataSource jdbc) {
 		this.jdbc = new JdbcTemplate(jdbc);
@@ -30,7 +31,7 @@ public class AboutDAO {
 			
 			@Override
 			public AboutModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-				AboutModel mod = new AboutModel();
+				
 				mod.set_id(rs.getInt(1));
 				mod.setName(rs.getString(2));
 				mod.setDescription(rs.getString(3));
