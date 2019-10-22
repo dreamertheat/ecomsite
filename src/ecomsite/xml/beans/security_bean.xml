@@ -21,8 +21,7 @@
 		create-session="always">
 
 
-	<security:intercept-url pattern="/**"
-			access="permitAll" />
+	
 
 		<security:intercept-url pattern="/"
 			access="permitAll" />
@@ -30,8 +29,10 @@
 		<security:intercept-url
 			pattern="/static/static/**" access="denyAll" />
 
-		<security:intercept-url pattern="/**"
-			access="denyAll" />
+		<security:intercept-url
+			pattern="/**" access="denyAll" />
+
+
 
 		<security:form-login login-page="/authority"
 			login-processing-url="/j_spring_security_check"

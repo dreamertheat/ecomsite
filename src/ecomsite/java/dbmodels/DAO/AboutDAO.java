@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import ecomsite.java.dbmodels.AboutModel;
 
@@ -59,6 +60,7 @@ public class AboutDAO {
 		return jdbc.update("update about set _id=:id, name=:name, description=:description, sequence=:sequence. date=:date",map)==1;
 	}
 	//batch update having pojo list
+	@Transactional
 	public int[] createAboutFromList(List<AboutModel> aboutList) {
 		SqlParameterSource[] source = SqlParameterSourceUtils.createBatch(aboutList.toArray());
 		return jdbc.batchUpdate("insert into about (name, description, sequence, date) values (:name, :description, :sequence, :date)", source);
