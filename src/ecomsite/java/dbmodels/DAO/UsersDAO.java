@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import ecomsite.java.dbmodels.UsersModel;
@@ -15,11 +15,11 @@ import ecomsite.java.dbmodels.UsersModel;
 @Component
 public class UsersDAO {
 	
-	JdbcTemplate jdbc;
+	NamedParameterJdbcTemplate jdbc;
 
 	
 	public void setJdbc(DataSource jdbc) {
-		this.jdbc = new JdbcTemplate(jdbc);
+		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 	
 	public List<UsersModel> getUsersModel(){

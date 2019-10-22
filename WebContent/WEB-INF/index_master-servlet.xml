@@ -11,7 +11,7 @@
 		annotation-config="true">
 	</context:component-scan>
 
-	<mvc:annotation-driven></mvc:annotation-driven>
+	
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		id="jspViewResolver">
@@ -19,4 +19,5 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	<mvc:resources location="/resources/" mapping="/static/**" />
+	<mvc:annotation-driven></mvc:annotation-driven>
 </beans>

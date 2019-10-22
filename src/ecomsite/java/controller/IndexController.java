@@ -19,9 +19,9 @@ import ecomsite.java.services.AboutService;
 
 @Controller
 public class IndexController {
-	
+
 	private AboutService service;
-	
+
 	@Autowired
 	public void setService(AboutService service) {
 		this.service = service;
@@ -32,23 +32,32 @@ public class IndexController {
 		session.setAttribute("time", "" + new Timestamp(new Date().getTime()));
 		return "index";
 	}
-	
+
 	@RequestMapping("/spring_security_login")
 	public String authorizer(HttpSession session) {
 		session.setAttribute("time", "" + new Timestamp(new Date().getTime()));
 		return "authority";
 	}
 	
-	
+	@RequestMapping("/j_spring_security_check")
+	public String authorizer() {
+		return "security";
+	}
+
+	@RequestMapping("/authority")
+	public String authorizer2(HttpSession session) {
+		session.setAttribute("time", "" + new Timestamp(new Date().getTime()));
+		return "authority";
+	}
 
 	@RequestMapping("/about")
 	public ModelAndView about() {
 		List<AboutModel> models = service.getModels();
 		ModelAndView view = new ModelAndView("about");
 		Map<String, Object> map = new HashMap<>();
-		System.out.println("-"+models.get(0).getAbout());
-		map.put("about", "-"+models.get(0).getAbout());
-		map.put("corporation", "-"+models.get(0).getCorporation());
+		System.out.println("-" + models.get(0).getAbout());
+		map.put("about", "-" + models.get(0).getAbout());
+		map.put("corporation", "-" + models.get(0).getCorporation());
 		map.put("service", models);
 		view.addAllObjects(map);
 		return view;

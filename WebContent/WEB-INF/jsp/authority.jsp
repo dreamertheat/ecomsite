@@ -8,11 +8,11 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
 <link href="${pageContext.request.contextPath}/static/static/css/login.css" rel='stylesheet' type='text/css'>
 <script src="${pageContext.request.contextPath}/static/static/js/login.js" type="text/javascript"></script>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 <body>
 
-<form action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
+<form action="<c:url value='/j_spring_security_check' />" method="POST">
 <div class="box">
 <h1>Authorization Required</h1>
 
