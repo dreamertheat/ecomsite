@@ -15,16 +15,15 @@ import ecomsite.java.dbmodels.UsersModel;
 
 @Component
 public class UsersDAO {
-	
+
 	NamedParameterJdbcTemplate jdbc;
 
-	
 	public void setJdbc(DataSource jdbc) {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
-	
-	public List<UsersModel> getUsersModel(){
-		
+
+	public List<UsersModel> getUsersModel() {
+
 		jdbc.query("select * from users", new RowMapper<UsersModel>() {
 
 			@Override
@@ -38,16 +37,15 @@ public class UsersDAO {
 				mod.setBirthdate(rs.getString(5));
 				return mod;
 			}
-			
-			
+
 		});
-		
+
 		return null;
-		
+
 	}
-	
+
 	public UsersModel getUserModelByID(int _id) {
-		
+
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("_id", _id);
 		return jdbc.queryForObject("select * from users where _id=:_id", map, new RowMapper<UsersModel>() {
@@ -62,13 +60,12 @@ public class UsersDAO {
 				model.setNotes(rs.getString("notes"));
 				model.setBirthdate(rs.getString("birthdate"));
 				model.setEnabled(rs.getInt("enabled"));
-				
+
 				return model;
 			}
-			
+
 		});
-		
+
 	}
-	
-	
+
 }

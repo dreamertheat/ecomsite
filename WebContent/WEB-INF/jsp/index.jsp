@@ -9,6 +9,7 @@
 </head>
 <body>
 	<b>Hello!</b><br> 
-	The Current time: <c:out value="${time}"></c:out>
+	The Current time: <c:out value="${time}"></c:out><br>
+	<a href="${pageContext.request.contextPath}/about?error=false"> ABOUT</a>
 </body>
 </html>

@@ -7,17 +7,25 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<context:component-scan base-package="ecomsite.java.controller"
-		annotation-config="true">
+	<context:component-scan
+		base-package="ecomsite.java.controller" annotation-config="true">
 	</context:component-scan>
 
-	
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		id="jspViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-	<mvc:resources location="/resources/" mapping="/static/**" />
+	<mvc:resources location="/resources/"
+		mapping="/static/**" />
 	<mvc:annotation-driven></mvc:annotation-driven>
+	<bean
+		class="org.springframework.context.support.ResourceBundleMessageSource"
+		id="messageSource">
+		<property name="basename"
+			value="ecomsite/file/properties/messages">
+		</property>
+	</bean>
 </beans>

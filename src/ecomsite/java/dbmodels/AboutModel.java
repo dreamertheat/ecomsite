@@ -1,14 +1,25 @@
 package ecomsite.java.dbmodels;
 
+import java.io.Serializable;
+
+import javax.validation.constraints.Size;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AboutModel {
+public class AboutModel implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 729678249666320770L;
+
 
 	private int _id;
-	private String name;
+	
+
 	private String description;
 	private String date;
 	private int sequence;
@@ -16,6 +27,26 @@ public class AboutModel {
 	private String corporation;
 
 	private String about;
+	
+	
+	@Size(min=5)
+	private String name;
+	
+	
+	
+	public AboutModel(int _id, String name, String description, String date, int sequence, String corporation,
+			String about) {
+		this._id = _id;
+		this.name = name;
+		this.description = description;
+		this.date = date;
+		this.sequence = sequence;
+		this.corporation = corporation;
+		this.about = about;
+	}
+	
+	public AboutModel() {
+	}
 
 	@Autowired
 	public AboutModel(@Value("${commons.corporation}") String corporation, @Value("${commons.about}") String about) {
@@ -46,14 +77,15 @@ public class AboutModel {
 	public void set_id(int _id) {
 		this._id = _id;
 	}
-
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	
 
 	public String getDescription() {
 		return description;

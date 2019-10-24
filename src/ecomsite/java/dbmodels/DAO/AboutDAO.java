@@ -2,12 +2,13 @@ package ecomsite.java.dbmodels.DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -33,7 +34,7 @@ public class AboutDAO {
 	//retrievelist
 	public List<AboutModel> getModels(){
 		
-		return jdbc.query("select * from about", new RowMapper<AboutModel>() {
+		return jdbc.query("select * from about order by sequence asc", new RowMapper<AboutModel>() {
 			
 			@Override
 			public AboutModel mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -65,5 +66,9 @@ public class AboutDAO {
 		SqlParameterSource[] source = SqlParameterSourceUtils.createBatch(aboutList.toArray());
 		return jdbc.batchUpdate("insert into about (name, description, sequence, date) values (:name, :description, :sequence, :date)", source);
 	}
-	
+	public int createAbout(AboutModel model) {
+		model.setDate(new SimpleDateFormat("MMM/dd/yyyy hh:mm:ss").format(new Date()));
+		BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(model);
+		return jdbc.update("insert into about (name, description, sequence, date) values (:name, :description, :sequence, :date)", map);
+	}
 }
