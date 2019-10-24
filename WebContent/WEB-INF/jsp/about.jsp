@@ -1,20 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="x"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>About</title>
+<title>About </title>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/static/css/common.css"
 	type="text/css">
 </head>
 <body>
+<sec:authorize access="!isAuthenticated()" >Not authenticated</sec:authorize>
+<sec:authorize access="isAuthenticated()" >Authenticated</sec:authorize>
+<sec:authorize access="denyAll" >Denied</sec:authorize>
+<sec:authorize access="permitAll" >**</sec:authorize>
+<fmt:message key="Title.page.about"  /><br>
 	<x:out value="${about}"></x:out>
 	<br>
 	<x:out value="${corporation}"></x:out>
