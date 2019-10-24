@@ -12,19 +12,24 @@
 			<security:user-service>
 				<security:user name="admin" authorities="admin"
 					password="admin" />
+					<security:user name="ojt" authorities="ojt"
+					password="ojt" />
 			</security:user-service>
+			<security:jdbc-user-service data-source-ref="dataSource"
+				authorities-by-username-query="select * from authorities where binary username = ?" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 
 
-	<security:http use-expressions="true"
-		create-session="always">
+	<security:http use-expressions="true" 
+		>
 
 
-	
+		<security:intercept-url pattern="/about"
+			access="isAuthenticated()" />
 
 		<security:intercept-url pattern="/"
-			access="permitAll" />
+			access="isAuthenticated()" />
 
 		<security:intercept-url
 			pattern="/static/static/**" access="denyAll" />
@@ -34,16 +39,16 @@
 
 
 
-		<security:form-login login-page="/authority"
-			login-processing-url="/j_spring_security_check"
-			authentication-failure-url="/authority?error=true"
-			password-parameter="j_password" username-parameter="j_username"
-			always-use-default-target="true" />
+		<security:form-login  />
 
 
 	</security:http>
 </beans>
-
+<!-- <security:form-login login-page="/authority"
+			login-processing-url="/j_spring_security_check"
+			authentication-failure-url="/authority?error=true"
+			password-parameter="j_password" username-parameter="j_username"
+			always-use-default-target="true" /> -->
 <!-- <security:form-login login-page="/authority" login-processing-url="/j_spring_security_check" 
 	authentication-failure-url="/authority?error=true" password-parameter="password" 
 	username-parameter="username" /> -->

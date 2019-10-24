@@ -22,23 +22,18 @@ public class IndexController {
 	
 	
 
-	@RequestMapping("/spring_security_login")
-	public String authorizer(HttpSession session) {
-		session.setAttribute("time", "" + new Timestamp(new Date().getTime()));
-		return "authority";
-	}
-
-	@RequestMapping("/j_spring_security_check")
-	public String authorizer() {
-		return "security";
-	}
-
-	@RequestMapping("/authority")
-	public String authorizer2(HttpSession session) {
-		session.setAttribute("time", "" + new Timestamp(new Date().getTime()));
-		return "authority";
-	}
-
+	/*
+	 * @RequestMapping("/spring_security_login") public String
+	 * authorizer(HttpSession session) { session.setAttribute("time", "" + new
+	 * Timestamp(new Date().getTime())); return "authority"; }
+	 * 
+	 * @RequestMapping("/j_spring_security_check") public String authorizer() {
+	 * return "security"; }
+	 * 
+	 * @RequestMapping("/authority") public String authorizer2(HttpSession session)
+	 * { session.setAttribute("time", "" + new Timestamp(new Date().getTime()));
+	 * return "authority"; }
+	 */
 	
 
 	

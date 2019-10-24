@@ -17,6 +17,7 @@
 	type="text/css">
 </head>
 <body>
+<sec:authorize access="isAnonymous()" >Anonymous</sec:authorize>
 <sec:authorize access="!isAuthenticated()" >Not authenticated</sec:authorize>
 <sec:authorize access="isAuthenticated()" >Authenticated</sec:authorize>
 <sec:authorize access="denyAll" >Denied</sec:authorize>
