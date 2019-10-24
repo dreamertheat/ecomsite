@@ -38,13 +38,16 @@ public class AboutDAO {
 			
 			@Override
 			public AboutModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+				AboutModel ad = new AboutModel();
 				
-				mod.set_id(rs.getInt(1));
-				mod.setName(rs.getString(2));
-				mod.setDescription(rs.getString(3));
-				mod.setSequence(rs.getInt(4));
-				mod.setDate(rs.getString(5));
-				return mod;
+				ad.set_id(rs.getInt(1));
+				ad.setName(rs.getString(2));
+				ad.setDescription(rs.getString(3));
+				ad.setSequence(rs.getInt(4));
+				ad.setDate(rs.getString(5));
+				ad.setCorporation(mod.getCorporation());
+				ad.setAbout(mod.getAbout());
+				return ad;
 			}
 		});
 		
