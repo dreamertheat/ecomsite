@@ -10,6 +10,6 @@
 <body>
 	<b>Hello!</b><br> 
 	The Current time: <c:out value="${time}"></c:out><br>
-	<a href="${pageContext.request.contextPath}/about?error=false"> ABOUT</a>
+	<a href="${pageContext.request.contextPath}/about?layer=main"> ABOUT</a>
 </body>
 </html>

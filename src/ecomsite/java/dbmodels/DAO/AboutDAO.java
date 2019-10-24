@@ -56,7 +56,8 @@ public class AboutDAO {
 	public int deleteAbout(int id) {
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("_id", id);
-		return jdbc.update("delete from about where _id=:id",map);
+		System.out.println("deleting from dao with id"+id);
+		return jdbc.update("delete from about where _id=:_id",map);
 	}
 	//update via Object or bean if you have one as parameter thus use 
 	public boolean updateAbout(AboutModel about) {

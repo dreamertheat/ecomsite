@@ -30,6 +30,7 @@
 			<td>description</td>
 			<td>date</td>
 			<td>sequence</td>
+			<td>delete</td>
 		</tr>
 
 		<x:forEach items="${service}" var="off">
@@ -39,13 +40,14 @@
 				<td><x:out value="${off.description}"></x:out></td>
 				<td><x:out value="${off.date}"></x:out></td>
 				<td><x:out value="${off.sequence}"></x:out></td>
+				<td><a href="${pageContext.request.contextPath}/about?layer=delete_about_${off._id}">delete</a></td>
 			</tr>
 		</x:forEach>
 	</table>
-	
-	
-	
-	
+
+
+
+
 	<%-- <form method="post" commandName="AboutModel" action="${pageContext.request.contextPath}/about&add=true">
 		<table style="border: solid 1px">
 
@@ -67,31 +69,36 @@
 
 		</table>
 	</form> --%>
-	
-	 <f:form method="POST" commandName="aboutModel" modelAttribute="aboutModel" action="${pageContext.request.contextPath}/about">
+
+	<f:form method="POST" commandName="aboutModel"
+		modelAttribute="aboutModel"
+		action="${pageContext.request.contextPath}/about?layer=add_about">
 		<table style="border: solid 1px">
 
 			<tr>
 				<td><f:label path="name">name</f:label></td>
-				<td><f:input type="text" placeholder="name" name="name" path="name"></f:input></td>
-				<td><f:errors path="name" ></f:errors>&nbsp;</td>
+				<td><f:input type="text" placeholder="name" name="name"
+						path="name"></f:input></td>
+				<td><f:errors path="name"></f:errors>&nbsp;</td>
 			</tr>
 			<tr>
 				<td>description</td>
-				<td><f:input type="text" placeholder="description" name="description" path="description"></f:input></td>
-				<td><f:errors path="description" ></f:errors>&nbsp;</td>
+				<td><f:input type="text" placeholder="description"
+						name="description" path="description"></f:input></td>
+				<td><f:errors path="description"></f:errors>&nbsp;</td>
 			</tr>
 			<tr>
 				<td>sequence</td>
-				<td><f:input type="text" placeholder="sequence" name="sequence" path="sequence"></f:input></td>
-				<td><f:errors path="sequence" ></f:errors>&nbsp;</td>
+				<td><f:input type="text" placeholder="sequence" name="sequence"
+						path="sequence"></f:input></td>
+				<td><f:errors path="sequence"></f:errors>&nbsp;</td>
 			</tr>
 			<tr>
-				<td><input type="submit" name="submit" value="submit" ></td>
+				<td><input type="submit" name="submit" value="submit"></td>
 			</tr>
 
 		</table>
-	</f:form> 
-	
+	</f:form>
+
 </body>
 </html>
