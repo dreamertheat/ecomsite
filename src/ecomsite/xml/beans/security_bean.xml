@@ -8,22 +8,26 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 	<security:authentication-manager>
+	
 		<security:authentication-provider>
 			<security:user-service>
 				<security:user name="admin" authorities="admin"
 					password="admin" />
-					<security:user name="ojt" authorities="ojt"
+				<security:user name="ojt" authorities="ojt"
 					password="ojt" />
 			</security:user-service>
-			<security:jdbc-user-service data-source-ref="dataSource"
-				authorities-by-username-query="select * from authorities where binary username = ?"
-				users-by-username-query="select * from users where binary username = ?" />
+
 		</security:authentication-provider>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="dataSource"
+				authorities-by-username-query="select username, authority from authorities where username = ?"
+				users-by-username-query="select username, password, enabled from users where username = ?" />
+		</security:authentication-provider>
+		
 	</security:authentication-manager>
 
 
-	<security:http use-expressions="true" 
-		>
+	<security:http use-expressions="true" auto-config="true">
 
 
 		<security:intercept-url pattern="/about"
@@ -35,21 +39,19 @@
 		<security:intercept-url
 			pattern="/static/static/**" access="denyAll" />
 
-		<security:intercept-url
-			pattern="/**" access="denyAll" />
+		<security:intercept-url pattern="/**"
+			access="denyAll" />
 
 
 
-		<security:form-login  />
+		<security:form-login />
 
 
 	</security:http>
 </beans>
-<!-- <security:form-login login-page="/authority"
-			login-processing-url="/j_spring_security_check"
-			authentication-failure-url="/authority?error=true"
-			password-parameter="j_password" username-parameter="j_username"
-			always-use-default-target="true" /> -->
+<!-- <security:form-login login-page="/authority" login-processing-url="/j_spring_security_check" 
+	authentication-failure-url="/authority?error=true" password-parameter="j_password" 
+	username-parameter="j_username" always-use-default-target="true" /> -->
 <!-- <security:form-login login-page="/authority" login-processing-url="/j_spring_security_check" 
 	authentication-failure-url="/authority?error=true" password-parameter="password" 
 	username-parameter="username" /> -->

@@ -44,5 +44,6 @@
 	<tx:annotation-driven />
 	<jee:jndi-lookup jndi-name="jdbc/springboot" id="dataSource"
 		expected-type="javax.sql.DataSource">
+	
 	</jee:jndi-lookup>
 </beans>
