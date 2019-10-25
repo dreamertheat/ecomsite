@@ -61,7 +61,6 @@ public class AboutDAO {
 			
 		}
 	//delete by ID. Use MapSqlParameterSource to assign individual values
-	@Secured("ROLE_ADMIN")
 	public int deleteAbout(int id) {
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("_id", id);

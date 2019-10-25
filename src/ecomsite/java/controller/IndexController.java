@@ -20,6 +20,12 @@ public class IndexController {
 		return "index";
 	}
 	
+	@RequestMapping("/access_denied")
+	public String access_denied(HttpSession session) {
+		session.setAttribute("time", "" + new Timestamp(new Date().getTime()));
+		return "access_denied";
+	}
+	
 	@RequestMapping("/logs")
 	public String logs(HttpSession session) {
 		session.setAttribute("time", "" + new Timestamp(new Date().getTime()));

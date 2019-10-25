@@ -56,7 +56,7 @@ public class AboutController {
 
 				int _id = Integer.parseInt("" + layer.replaceAll("[^0-9]", ""));
 
-				service.getAboutdao().deleteAbout(_id);
+				service.deleteAbout(_id);
 				
 			} catch (DataAccessException e) {
 				System.out.println(e);

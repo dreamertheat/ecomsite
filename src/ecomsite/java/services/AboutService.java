@@ -3,6 +3,7 @@ package ecomsite.java.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import ecomsite.java.dbmodels.AboutModel;
@@ -25,7 +26,10 @@ public class AboutService {
 		this.aboutdao = aboutdao;
 		this.usersdao = usersdao;
 	}
+	
+	public AboutService() {
 
+	}
 
 
 	public UsersDAO getUsersdao() {
@@ -37,8 +41,11 @@ public class AboutService {
 	public void setUsersdao(UsersDAO usersdao) {
 		this.usersdao = usersdao;
 	}
-
-
+	
+	@Secured("ROLE_ADMIN")
+	public int deleteAbout(int id) {
+		return aboutdao.deleteAbout(id);
+	}
 
 	public AboutDAO getAboutdao() {
 		return aboutdao;
