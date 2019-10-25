@@ -20,7 +20,11 @@ public class IndexController {
 		return "index";
 	}
 	
-	
+	@RequestMapping("/logs")
+	public String logs(HttpSession session) {
+		session.setAttribute("time", "" + new Timestamp(new Date().getTime()));
+		return "logs";
+	}
 
 	/*
 	 * @RequestMapping("/spring_security_login") public String

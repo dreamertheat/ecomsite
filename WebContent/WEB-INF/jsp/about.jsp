@@ -17,10 +17,13 @@
 	type="text/css">
 </head>
 <body>
-<sec:authorize access="isAnonymous()" >Anonymous</sec:authorize>
-<sec:authorize access="!isAuthenticated()" >Not authenticated</sec:authorize>
-<sec:authorize access="isAuthenticated()" >Authenticated</sec:authorize>
-<sec:authorize access="denyAll" >Denied</sec:authorize>
+<sec:authorize access="hasRole('ROLE_OJT')" >OJT<br></sec:authorize>
+<sec:authorize access="hasRole('ROLE_STATIC')" >STATIC<br></sec:authorize>
+<sec:authorize access="hasRole('ROLE_ADMIN')" >Admin<br></sec:authorize>
+<sec:authorize access="isAnonymous()" >Anonymous<br></sec:authorize>
+<sec:authorize access="!isAuthenticated()" >Not authenticated<br></sec:authorize>
+<sec:authorize access="isAuthenticated()" >Authenticated<br></sec:authorize>
+<sec:authorize access="denyAll" >Denied<br></sec:authorize>
 <sec:authorize access="permitAll" >**</sec:authorize>
 <fmt:message key="Title.page.about"  /><br>
 	<x:out value="${about}"></x:out>

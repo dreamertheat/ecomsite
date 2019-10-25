@@ -11,9 +11,9 @@
 	
 		<security:authentication-provider>
 			<security:user-service>
-				<security:user name="admin" authorities="admin"
+				<security:user name="admin" authorities="ROLE_STATIC"
 					password="admin" />
-				<security:user name="ojt" authorities="ojt"
+				<security:user name="ojt" authorities="ROLE_OJT"
 					password="ojt" />
 			</security:user-service>
 
@@ -29,7 +29,9 @@
 
 	<security:http use-expressions="true" auto-config="true">
 
-
+		<security:intercept-url pattern="/logs"
+			access="hasRole('admin')" />
+			
 		<security:intercept-url pattern="/about"
 			access="isAuthenticated()" />
 
@@ -48,6 +50,8 @@
 
 
 	</security:http>
+	
+	<security:global-method-security secured-annotations="enabled"></security:global-method-security>
 </beans>
 <!-- <security:form-login login-page="/authority" login-processing-url="/j_spring_security_check" 
 	authentication-failure-url="/authority?error=true" password-parameter="j_password" 

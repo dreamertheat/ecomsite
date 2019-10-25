@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,6 +61,7 @@ public class AboutDAO {
 			
 		}
 	//delete by ID. Use MapSqlParameterSource to assign individual values
+	@Secured("ROLE_ADMIN")
 	public int deleteAbout(int id) {
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("_id", id);
