@@ -20,6 +20,7 @@
 		</security:authentication-provider>
 		<security:authentication-provider>
 			<security:jdbc-user-service
+			id="jdbcprovider"
 				data-source-ref="dataSource"
 				authorities-by-username-query="select username, authority from authorities where username = ?"
 				users-by-username-query="select username, password, enabled from users where username = ?" />
@@ -32,6 +33,11 @@
 
 		<security:intercept-url pattern="/logs"
 			access="hasRole('admin')" />
+			
+			<security:intercept-url pattern="/authority"
+			access="permitAll" />
+			<security:intercept-url pattern="/logged_out"
+			access="permitAll" />
 
 		<security:intercept-url
 			pattern="/access_denied" access="hasRole('access_denied')" />
@@ -43,17 +49,23 @@
 			access="isAuthenticated()" />
 
 		<security:intercept-url
-			pattern="/static/static/**" access="denyAll" />
+			pattern="/static/static/**" access="permitAll" />
 
 		<security:intercept-url pattern="/**"
 			access="denyAll" />
 
 
 	
-		<security:form-login />
+		 <security:form-login login-page="/authority" login-processing-url="/j_spring_security_check" 
+	authentication-failure-url="/authority?error=true" password-parameter="j_password" 
+	username-parameter="j_username" always-use-default-target="true" />
 		<security:access-denied-handler error-page="/access_denied" />
 
 		<!-- <security:access-denied-handler error-page="access_denied" /> -->
+		<security:remember-me use-secure-cookie="true"
+			user-service-ref='jdbcprovider' key="remembermeprovider" />
+		<security:logout invalidate-session="true"
+			logout-success-url="/logged_out" />
 	</security:http>
 
 	<security:global-method-security
