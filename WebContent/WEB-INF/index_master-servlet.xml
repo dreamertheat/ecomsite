@@ -28,4 +28,19 @@
 			value="ecomsite.file.properties.messages">
 		</property>
 	</bean>
+
+	<bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
+		 <property name="viewClass"
+        value="org.springframework.web.servlet.view.tiles2.TilesView" />
+	</bean>
+
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/layout/tiles-definitions.xml</value>
+			</list>
+		</property>
+	</bean>
 </beans>
