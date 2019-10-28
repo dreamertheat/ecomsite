@@ -24,7 +24,7 @@
 				data-source-ref="dataSource"
 				authorities-by-username-query="select username, authority from authorities where username = ?"
 				users-by-username-query="select username, password, enabled from users where username = ?" />
-			<security:password-encoder base64="true" hash="sha"></security:password-encoder>
+			<security:password-encoder base64="false" hash="md5"></security:password-encoder>
 		</security:authentication-provider>
 
 		
