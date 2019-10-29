@@ -5,14 +5,18 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-
+	
+	private static Logger logger = Logger.getLogger(IndexController.class);
+	
 	@RequestMapping("/")
 	public String index(HttpSession session) {
+		logger.debug("index");
 		session.setAttribute("time", "" + new Timestamp(new Date().getTime()));
 		return "index";
 	}
