@@ -3,8 +3,57 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+       
 <tiles-definitions>
-  <definition name="index" template="/WEB-INF/template/default.jsp">
-<!--     <put-attribute name="about" value="Tiles tutorial homepage" />
- -->  </definition>
+
+  <definition name="base" template="/WEB-INF/template/default.jsp">
+	   <put-attribute name="title" value="Ecomsite" />
+	   <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+	   <put-attribute name="content" value="/WEB-INF/tiles/content.jsp" />
+	   <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+  </definition>
+  
+   <definition name="authority" extends="base">
+	   <put-attribute name="title" value="Access Denied" />
+	   <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+	   <put-attribute name="content" value="/WEB-INF/tiles/authority.jsp" />
+	   <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+  </definition>
+  
+   <definition name="index" extends="base">
+	   <put-attribute name="title" value="Ecomsite" />
+	   <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+	   <put-attribute name="content" value="/WEB-INF/tiles/index.jsp" />
+	   <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+  </definition>
+  
+   <definition name="about" extends="base">
+	   <put-attribute name="title" value="About" />
+	   <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+	   <put-attribute name="content" value="/WEB-INF/tiles/about.jsp" />
+	   <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+  </definition>
+  
+  <definition name="access_denied" extends="base">
+	   <put-attribute name="title" value="ACCESS DENIED" />
+	   <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+	   <put-attribute name="content" value="/WEB-INF/tiles/access_denied.jsp" />
+	   <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+  </definition>
+  
+  <definition name="logs" extends="base">
+	   <put-attribute name="title" value="LOGS" />
+	   <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+	   <put-attribute name="content" value="/WEB-INF/tiles/logs.jsp" />
+	   <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+  </definition>
+  
+  <definition name="logged_out" extends="base">
+	   <put-attribute name="title" value="Logged out" />
+	   <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+	   <put-attribute name="content" value="/WEB-INF/tiles/logged_out.jsp" />
+	   <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+  </definition>
+  
+  
 </tiles-definitions>

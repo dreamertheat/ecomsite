@@ -1,22 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+
+<body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="x"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
-<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>About </title>
-
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/static/static/css/common.css"
-	type="text/css">
-</head>
-<body>
+<%@taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <sec:authorize access="hasRole('ROLE_OJT')" >OJT<br></sec:authorize>
 <sec:authorize access="hasRole('ROLE_STATIC')" >STATIC<br></sec:authorize>
 <sec:authorize access="hasRole('ROLE_ADMIN')" >Admin<br></sec:authorize>
@@ -26,9 +15,9 @@
 <sec:authorize access="denyAll" >Denied<br></sec:authorize>
 <sec:authorize access="permitAll" >**</sec:authorize>
 <fmt:message key="Title.page.about"  /><br>
-	<x:out value="${about}"></x:out>
+	<c:out value="${about}"></c:out>
 	<br>
-	<x:out value="${corporation}"></x:out>
+	<c:out value="${corporation}"></c:out>
 	<br>
 
 
@@ -44,16 +33,16 @@
 			<td>delete</td>
 		</tr>
 
-		<x:forEach items="${service}" var="off">
+		<c:forEach items="${service}" var="off">
 			<tr>
-				<td><x:out value="${off._id}"></x:out></td>
-				<td><x:out value="${off.name}"></x:out></td>
-				<td><x:out value="${off.description}"></x:out></td>
-				<td><x:out value="${off.date}"></x:out></td>
-				<td><x:out value="${off.sequence}"></x:out></td>
+				<td><c:out value="${off._id}"></c:out></td>
+				<td><c:out value="${off.name}"></c:out></td>
+				<td><c:out value="${off.description}"></c:out></td>
+				<td><c:out value="${off.date}"></c:out></td>
+				<td><c:out value="${off.sequence}"></c:out></td>
 				<td><a href="${pageContext.request.contextPath}/about?layer=delete_about_${off._id}">delete</a></td>
 			</tr>
-		</x:forEach>
+		</c:forEach>
 	</table>
 
 
