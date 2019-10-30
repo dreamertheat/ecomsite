@@ -11,6 +11,7 @@
 		<config>src/ecomsite/xml/beans/dao_bean.xml</config>
 		<config>src/ecomsite/xml/beans/service_bean.xml</config>
 		<config>src/ecomsite/xml/beans/security_bean.xml</config>
+		<config>test/ecomsite/config/dao_bean_test.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

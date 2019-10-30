@@ -14,36 +14,40 @@
 		base-package="ecomsite.java.dbmodels.DAO" annotation-config="true">
 	</context:component-scan>
 	<context:component-scan
-		base-package="ecomsite.java.dbmodels.dbmodels" annotation-config="true">
+		base-package="ecomsite.java.dbmodels.dbmodels"
+		annotation-config="true">
 	</context:component-scan>
 	<context:component-scan
 		base-package="ecomsite.java.services" annotation-config="true">
 	</context:component-scan>
-	
+
 	<context:property-placeholder
 		location="classpath:ecomsite/file/properties/commons.properties" />
-	
-		
+
+
 	<context:annotation-config></context:annotation-config>
 
 
-	<!-- <bean id="dataSource"
-		class="org.apache.tomcat.dbcp.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${db.driver}"></property>
-		<property name="url" value="${db.url}"></property>
-		<property name="username" value="${db.username}"></property>
-		<property name="password" value="${db.password}"></property>
-	</bean> -->
-	
-	
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	<property name="dataSource" ref="dataSource"></property>
-	</bean>
-	<tx:annotation-driven />
-	<jee:jndi-lookup jndi-name="jdbc/springboot" id="dataSource"
-		expected-type="javax.sql.DataSource">
-	
-	</jee:jndi-lookup>
+	<!-- <bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource" 
+		destroy-method="close"> <property name="driverClassName" value="${db.driver}"></property> 
+		<property name="url" value="${db.url}"></property> <property name="username" 
+		value="${db.username}"></property> <property name="password" value="${db.password}"></property> 
+		</bean> -->
+
+	<beans profile="production">
+
+
+		<bean id="transactionManager"
+			class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource"></property>
+		</bean>
+
+
+		<tx:annotation-driven />
+		<jee:jndi-lookup jndi-name="jdbc/springboot"
+			id="dataSource" expected-type="javax.sql.DataSource">
+
+		</jee:jndi-lookup>
+
+	</beans>
 </beans>
