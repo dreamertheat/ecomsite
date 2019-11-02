@@ -21,7 +21,7 @@
 	<br>
 
 
-
+<form id="updater" method="get" action="${pageContext.request.contextPath}/about"></form>
 	<table style="border: solid 1px">
 
 		<tr>
@@ -32,16 +32,20 @@
 			<td>sequence</td>
 			<td>delete</td>
 		</tr>
-
+		
 		<c:forEach items="${service}" var="off">
-			<tr>
-				<td><c:out value="${off._id}"></c:out></td>
-				<td><c:out value="${off.name}"></c:out></td>
-				<td><c:out value="${off.description}"></c:out></td>
-				<td><c:out value="${off.date}"></c:out></td>
-				<td><c:out value="${off.sequence}"></c:out></td>
-				<td><a href="${pageContext.request.contextPath}/about?layer=delete_about_${off._id}">delete</a></td>
-			</tr>
+			<tr>		
+			
+				<td><c:out value="${off._id}"></c:out><input form="updater" type="hidden" name="u_id" value="<c:out value="${off._id}"></c:out>"></input>    <input form="updater" type="hidden" name="layer" value="update_about"></input></td>
+				<td><input form="updater" type="text" name="uname" value="<c:out value="${off.name}"></c:out>"></input></td>
+				<td><input form="updater" type="text" name="udescription" value="<c:out value="${off.description}"></c:out>"></input></td>
+				<td><input form="updater" type="text" name="udate" value="<c:out value="${off.date}"></c:out>"></input></td>
+				<td><input form="updater" type="text" name="usequence" value="<c:out value="${off.sequence}"></c:out>"></input></td>
+				<td><c:choose><c:when test="${authenticated!=null}"><sec:authorize access="isAuthenticated()" ><a href="${pageContext.request.contextPath}/about?layer=delete_about_${off._id}">delete</a></sec:authorize></c:when></c:choose></td>
+				<td><c:choose><c:when test="${authenticated!=null}"><sec:authorize access="isAuthenticated()" ><input form="updater" type="submit" value="update" ></input></sec:authorize></c:when></c:choose></td>
+				
+			</tr>		
+			
 		</c:forEach>
 	</table>
 

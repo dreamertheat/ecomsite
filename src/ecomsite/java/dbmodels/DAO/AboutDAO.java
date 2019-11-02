@@ -20,6 +20,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import ecomsite.java.custom.AboutRowMapper;
 import ecomsite.java.dbmodels.AboutModel;
 
 @Component
@@ -34,8 +35,8 @@ public class AboutDAO {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 
-	// retrievelist
-	public List<AboutModel> getModels() {
+	// retrievelist with static data from properties
+	public List<AboutModel> getModelsOld() {
 
 		return jdbc.query("select * from about order by sequence asc", new RowMapper<AboutModel>() {
 
@@ -55,6 +56,13 @@ public class AboutDAO {
 		});
 
 	}
+	
+	// retrievelist using custom rowMapper
+		public List<AboutModel> getModels() {
+
+			return jdbc.query("select * from about order by sequence asc", new AboutRowMapper(mod));
+
+		}
 
 	// retrievelist using BeanPropertyRowMapper
 	public List<AboutModel> getModelsBP() {
@@ -72,11 +80,13 @@ public class AboutDAO {
 	}
 
 	// update via Object or bean if you have one as parameter thus use
-	public boolean updateAbout(AboutModel about) {
+	public int updateAbout(AboutModel about) {
 		BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(about);
+		System.out.println("sequence debug ua2 "+about.getSequence());
+
 		return jdbc.update(
-				"update about set _id=:id, name=:name, description=:description, sequence=:sequence. date=:date",
-				map) == 1;
+				"update about set name=:name, description=:description, sequence=:sequence, date=:date where _id=:_id",
+				map);
 	}
 
 	// batch update having pojo list

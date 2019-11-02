@@ -8,6 +8,7 @@ import java.util.concurrent.Semaphore;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ public class AboutController {
 	}
 
 	@RequestMapping(value = "/about", params = { "layer" })
-	public synchronized ModelAndView about(@Valid @ModelAttribute AboutModel aboutModel, BindingResult result,
-			ModelMap model, @RequestParam(value = "layer") String layer, Principal principal) {
+	public synchronized ModelAndView about(@Valid @ModelAttribute AboutModel aboutModel, BindingResult result, Principal principal,
+			ModelMap model, @RequestParam(value = "layer") String layer, HttpServletRequest request) {
 		
 		if (result.hasErrors()) {
 			System.out.println("errors " + result.getErrorCount());
@@ -63,6 +64,25 @@ public class AboutController {
 				System.out.println(e);
 			}
 		}
+		// handle update
+				if (layer.contains("update_about")) {
+					System.out.println("update!");
+					
+					try {
+						
+						AboutModel amodel = new AboutModel();
+						amodel.set_id(Integer.parseInt(request.getParameter("u_id")));
+						amodel.setName(request.getParameter("uname"));
+						amodel.setDescription(request.getParameter("udescription"));
+						amodel.setSequence(Integer.parseInt(request.getParameter("usequence")));
+						System.out.println("sequence debug "+amodel.toString());
+						amodel.setDate(request.getParameter("udate"));
+						service.updateAbout(amodel);
+						
+					} catch (DataAccessException e) {
+						System.out.println(e);
+					}
+				}
 		System.out.println("error is " + layer);
 		// viewing
 				List<AboutModel> models = service.getModels();
@@ -81,6 +101,7 @@ public class AboutController {
 				model.addAttribute("sequence", aboutModel.getSequence());
 				
 		System.out.println("Principal "+principal.toString());
+		model.addAttribute("authenticated",principal.getName());
 		return view;
 	}
 }

@@ -46,6 +46,13 @@ public class AboutService {
 	public int deleteAbout(int id) {
 		return aboutdao.deleteAbout(id);
 	}
+	
+	@Secured("ROLE_ADMIN")
+	public int updateAbout(AboutModel model) {
+		System.out.println("sequence debug ua1 "+model.getSequence());
+
+		return aboutdao.updateAbout(model);
+	}
 
 	public AboutDAO getAboutdao() {
 		return aboutdao;
