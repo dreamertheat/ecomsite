@@ -1,5 +1,6 @@
 package ecomsite.java.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class AboutController {
 
 	@RequestMapping(value = "/about", params = { "layer" })
 	public synchronized ModelAndView about(@Valid @ModelAttribute AboutModel aboutModel, BindingResult result,
-			ModelMap model, @RequestParam(value = "layer") String layer) {
+			ModelMap model, @RequestParam(value = "layer") String layer, Principal principal) {
 		
 		if (result.hasErrors()) {
 			System.out.println("errors " + result.getErrorCount());
@@ -78,6 +79,8 @@ public class AboutController {
 				model.addAttribute("name", aboutModel.getName());
 				model.addAttribute("description", aboutModel.getDescription());
 				model.addAttribute("sequence", aboutModel.getSequence());
+				
+		System.out.println("Principal "+principal.toString());
 		return view;
 	}
 }

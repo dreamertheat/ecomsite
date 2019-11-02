@@ -24,24 +24,25 @@ import ecomsite.java.dbmodels.AboutModel;
 
 @Component
 public class AboutDAO {
-	
+
 	NamedParameterJdbcTemplate jdbc;
 	@Autowired
 	AboutModel mod;
+
 	@Autowired
 	public void setJdbc(DataSource jdbc) {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
-	
-	//retrievelist
-	public List<AboutModel> getModels(){
-		
+
+	// retrievelist
+	public List<AboutModel> getModels() {
+
 		return jdbc.query("select * from about order by sequence asc", new RowMapper<AboutModel>() {
-			
+
 			@Override
 			public AboutModel mapRow(ResultSet rs, int rowNum) throws SQLException {
 				AboutModel ad = new AboutModel();
-				
+
 				ad.set_id(rs.getInt(1));
 				ad.setName(rs.getString(2));
 				ad.setDescription(rs.getString(3));
@@ -52,35 +53,46 @@ public class AboutDAO {
 				return ad;
 			}
 		});
-		
+
 	}
-	//retrievelist using BeanPropertyRowMapper
-		public List<AboutModel> getModelsBP(){
-			
-			return jdbc.query("select * from about", BeanPropertyRowMapper.newInstance(AboutModel.class));
-			
-		}
-	//delete by ID. Use MapSqlParameterSource to assign individual values
+
+	// retrievelist using BeanPropertyRowMapper
+	public List<AboutModel> getModelsBP() {
+
+		return jdbc.query("select * from about", BeanPropertyRowMapper.newInstance(AboutModel.class));
+
+	}
+
+	// delete by ID. Use MapSqlParameterSource to assign individual values
 	public int deleteAbout(int id) {
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("_id", id);
-		System.out.println("deleting from dao with id"+id);
-		return jdbc.update("delete from about where _id=:_id",map);
+		System.out.println("deleting from dao with id" + id);
+		return jdbc.update("delete from about where _id=:_id", map);
 	}
-	//update via Object or bean if you have one as parameter thus use 
+
+	// update via Object or bean if you have one as parameter thus use
 	public boolean updateAbout(AboutModel about) {
 		BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(about);
-		return jdbc.update("update about set _id=:id, name=:name, description=:description, sequence=:sequence. date=:date",map)==1;
+		return jdbc.update(
+				"update about set _id=:id, name=:name, description=:description, sequence=:sequence. date=:date",
+				map) == 1;
 	}
-	//batch update having pojo list
+
+	// batch update having pojo list
 	@Transactional
 	public int[] createAboutFromList(List<AboutModel> aboutList) {
 		SqlParameterSource[] source = SqlParameterSourceUtils.createBatch(aboutList.toArray());
-		return jdbc.batchUpdate("insert into about (name, description, sequence, date) values (:name, :description, :sequence, :date)", source);
+		return jdbc.batchUpdate(
+				"insert into about (name, description, sequence, date) values (:name, :description, :sequence, :date)",
+				source);
 	}
+
 	public int createAbout(AboutModel model) {
 		model.setDate(new SimpleDateFormat("MMM/dd/yyyy hh:mm:ss").format(new Date()));
 		BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(model);
-		return jdbc.update("insert into about (name, description, sequence, date) values (:name, :description, :sequence, :date)", map);
+		return jdbc.update(
+				"insert into about (name, description, sequence, date) values (:name, :description, :sequence, :date)",
+				map);
 	}
 }
