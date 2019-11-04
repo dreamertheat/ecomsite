@@ -58,11 +58,11 @@ public class AboutDAO {
 	}
 	
 	// retrievelist using custom rowMapper
-		public List<AboutModel> getModels() {
+	public List<AboutModel> getModels() {
 
-			return jdbc.query("select * from about order by sequence asc", new AboutRowMapper(mod));
+		return jdbc.query("select * from about order by sequence asc", new AboutRowMapper(mod));
 
-		}
+	}
 
 	// retrievelist using BeanPropertyRowMapper
 	public List<AboutModel> getModelsBP() {

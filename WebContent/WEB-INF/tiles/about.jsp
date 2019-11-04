@@ -37,15 +37,14 @@
 			<tr>		
 			
 				<td><c:out value="${off._id}"></c:out><input form="updater" type="hidden" name="u_id" value="<c:out value="${off._id}"></c:out>"></input>    <input form="updater" type="hidden" name="layer" value="update_about"></input></td>
-				<td><input form="updater" type="text" name="uname" value="<c:out value="${off.name}"></c:out>"></input></td>
-				<td><input form="updater" type="text" name="udescription" value="<c:out value="${off.description}"></c:out>"></input></td>
-				<td><input form="updater" type="text" name="udate" value="<c:out value="${off.date}"></c:out>"></input></td>
-				<td><input form="updater" type="text" name="usequence" value="<c:out value="${off.sequence}"></c:out>"></input></td>
+				<td><c:out value="${off.name}"></c:out></td>
+				<td><c:out value="${off.description}"></c:out></td>
+				<td><c:out value="${off.date}"></c:out></input></td>
+				<td><c:out value="${off.sequence}"></c:out></td>
 				<td><c:choose><c:when test="${authenticated!=null}"><sec:authorize access="isAuthenticated()" ><a href="${pageContext.request.contextPath}/about?layer=delete_about_${off._id}">delete</a></sec:authorize></c:when></c:choose></td>
-				<td><c:choose><c:when test="${authenticated!=null}"><sec:authorize access="isAuthenticated()" ><input form="updater" type="submit" value="update" ></input></sec:authorize></c:when></c:choose></td>
+				<td><c:choose><c:when test="${authenticated!=null}"><sec:authorize access="isAuthenticated()" ><a href="${pageContext.request.contextPath}/about?layer=update_about_${off._id}&uname=${off.name}&udescription=${off.description}&usequence=${off.sequence}&udate=${off.date}&u_id=${off._id}">update</a></sec:authorize></c:when></c:choose></td>
 				
 			</tr>		
-			
 		</c:forEach>
 	</table>
 
@@ -73,29 +72,53 @@
 
 		</table>
 	</form> --%>
-
+	<c:choose>
+		<c:when test='${mode=="add"}'> 
+		  <c:set value="${pageContext.request.contextPath}/about?layer=add_about" var="mode_"></c:set>
+		</c:when> 
+		<c:when test='${mode=="update"}'> 
+		  <c:set value="${pageContext.request.contextPath}/about?layer=confirm_update" var="mode_"></c:set>
+		</c:when>
+		<c:otherwise>
+		 <c:set value="asdasdasdasd" var="mode_"></c:set>
+		</c:otherwise>
+	</c:choose>
+	${mode}
+	
 	<f:form method="POST" commandName="aboutModel"
 		modelAttribute="aboutModel"
-		action="${pageContext.request.contextPath}/about?layer=add_about">
+		action='${mode_}'>
 		<table style="border: solid 1px">
 
 			<tr>
 				<td><f:label path="name">name</f:label></td>
 				<td><f:input type="text" placeholder="name" name="name"
-						path="name"></f:input></td>
+						path="name" value="${uname}"></f:input></td>
 				<td><f:errors path="name"></f:errors>&nbsp;</td>
 			</tr>
 			<tr>
 				<td>description</td>
 				<td><f:input type="text" placeholder="description"
-						name="description" path="description"></f:input></td>
+						name="description" value="${udescription}" path="description"></f:input></td>
 				<td><f:errors path="description"></f:errors>&nbsp;</td>
 			</tr>
 			<tr>
 				<td>sequence</td>
-				<td><f:input type="text" placeholder="sequence" name="sequence"
+				<td><f:input type="text" value="${usequence}" placeholder="sequence" name="sequence"
 						path="sequence"></f:input></td>
 				<td><f:errors path="sequence"></f:errors>&nbsp;</td>
+			</tr>
+			<tr>
+				<c:choose>
+				 <c:when test="${udate!=null}">	
+						<td>date</td>
+						<td><f:input type="text" value="${udate}" placeholder="date" name="date"
+								path="date"></f:input></td>
+						<td><f:input type="hidden" value="${u_id}" placeholder="_id" name="_id"
+						path="_id"></f:input></td>
+						<td><f:errors path="date"></f:errors>&nbsp;</td>
+					</c:when>
+				</c:choose>
 			</tr>
 			<tr>
 				<td><input type="submit" name="submit" value="submit"></td>
@@ -103,6 +126,8 @@
 
 		</table>
 	</f:form>
+	
+	
 
 </body>
 </html>

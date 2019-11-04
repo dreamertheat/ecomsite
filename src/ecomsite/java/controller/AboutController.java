@@ -43,6 +43,13 @@ public class AboutController {
 			System.out.println("errors " + result.getErrorCount());
 			// return new ModelAndView("error");
 		}
+		//attribute for add and delete
+		if (layer.equalsIgnoreCase("main")||layer.equalsIgnoreCase("add_about")||layer.contains("delete_about")) {
+			model.addAttribute("mode","add");
+		} else {
+			model.addAttribute("mode","update");
+		}
+		
 		// handle create
 		if (layer.equalsIgnoreCase("add_about")) {
 			try {
@@ -65,40 +72,71 @@ public class AboutController {
 			}
 		}
 		// handle update
-				if (layer.contains("update_about")) {
-					System.out.println("update!");
+		if (layer.contains("update_about")) {
+			System.out.println("update!");
+			
+			try {
+				
+				AboutModel amodel = new AboutModel();
+				System.out.println(Integer.parseInt("" + layer.replaceAll("[^0-9]", "")));
+				System.out.println("name" + request.getParameter("uname"));
+				
+				model.addAttribute("u_id", request.getParameter("u_id"));
+				model.addAttribute("uname", request.getParameter("uname"));
+				model.addAttribute("udescription", request.getParameter("udescription"));
+				model.addAttribute("usequence", request.getParameter("usequence"));
+				model.addAttribute("udate", request.getParameter("udate"));
+				System.out.println(request.getParameter("udate"));
+				
+				/*
+			 * amodel.set_id(Integer.parseInt(request.getParameter("u_id")));
+			 * amodel.setName(request.getParameter("uname"));
+			 * amodel.setDescription(request.getParameter("udescription"));
+			 * amodel.setSequence(Integer.parseInt(request.getParameter("usequence")));
+			 * System.out.println("sequence debug "+amodel.toString());
+			 * amodel.setDate(request.getParameter("udate")); service.updateAbout(amodel);
+			 */
+				
+			} catch (DataAccessException e) {
+				System.out.println(e);
+			}
+		}
+		
+		// handle update
+				if (layer.contains("confirm_update")) {
+					System.out.println("confirmed");
 					
 					try {
 						
-						AboutModel amodel = new AboutModel();
-						amodel.set_id(Integer.parseInt(request.getParameter("u_id")));
-						amodel.setName(request.getParameter("uname"));
-						amodel.setDescription(request.getParameter("udescription"));
-						amodel.setSequence(Integer.parseInt(request.getParameter("usequence")));
-						System.out.println("sequence debug "+amodel.toString());
-						amodel.setDate(request.getParameter("udate"));
-						service.updateAbout(amodel);
+					  AboutModel amodel = new AboutModel();
+					  amodel.set_id(Integer.parseInt(request.getParameter("u_id")));
+					  amodel.setName(request.getParameter("uname"));
+					  amodel.setDescription(request.getParameter("udescription"));
+					  amodel.setSequence(Integer.parseInt(request.getParameter("usequence")));
+					  amodel.setDate(request.getParameter("udate")); service.updateAbout(amodel);
+					  service.updateAbout(amodel);
 						
 					} catch (DataAccessException e) {
 						System.out.println(e);
 					}
 				}
+				
 		System.out.println("error is " + layer);
 		// viewing
-				List<AboutModel> models = service.getModels();
-				ModelAndView view = new ModelAndView("about");
-				Map<String, Object> map = new HashMap<>();
-				System.out.println("-" + models.get(0).getAbout());
-				map.put("about", "-" + models.get(0).getAbout());
-				map.put("corporation", "-" + models.get(0).getCorporation());
-				map.put("service", models);
-				view.addAllObjects(map);
+		List<AboutModel> models = service.getModels();
+		ModelAndView view = new ModelAndView("about");
+		Map<String, Object> map = new HashMap<>();
+		System.out.println("-" + models.get(0).getAbout());
+		map.put("about", "-" + models.get(0).getAbout());
+		map.put("corporation", "-" + models.get(0).getCorporation());
+		map.put("service", models);
+		view.addAllObjects(map);
 
-				// adding data
-				model.addAttribute("aboutModel", aboutModel);
-				model.addAttribute("name", aboutModel.getName());
-				model.addAttribute("description", aboutModel.getDescription());
-				model.addAttribute("sequence", aboutModel.getSequence());
+		//adding data
+		model.addAttribute("aboutModel", aboutModel);
+		model.addAttribute("name", aboutModel.getName());
+		model.addAttribute("description", aboutModel.getDescription());
+		model.addAttribute("sequence", aboutModel.getSequence());
 				
 		System.out.println("Principal "+principal.toString());
 		model.addAttribute("authenticated",principal.getName());
