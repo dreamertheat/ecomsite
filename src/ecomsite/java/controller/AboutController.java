@@ -109,11 +109,11 @@ public class AboutController {
 					try {
 						
 					  AboutModel amodel = new AboutModel();
-					  amodel.set_id(Integer.parseInt(request.getParameter("u_id")));
-					  amodel.setName(request.getParameter("uname"));
-					  amodel.setDescription(request.getParameter("udescription"));
-					  amodel.setSequence(Integer.parseInt(request.getParameter("usequence")));
-					  amodel.setDate(request.getParameter("udate")); service.updateAbout(amodel);
+					  amodel.set_id(Integer.parseInt(request.getParameter("_id")));
+					  amodel.setName(request.getParameter("name"));
+					  amodel.setDescription(request.getParameter("description"));
+					  amodel.setSequence(Integer.parseInt(request.getParameter("sequence")));
+					  amodel.setDate(request.getParameter("date")); service.updateAbout(amodel);
 					  service.updateAbout(amodel);
 						
 					} catch (DataAccessException e) {
