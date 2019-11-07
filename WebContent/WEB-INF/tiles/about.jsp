@@ -6,6 +6,14 @@
 
 <%@taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
+	
+<%! int z=0; int x=10; %>
+<c:catch var="error" >
+	<% int ans = x/z; out.println(ans); %>
+</c:catch>
+<c:if test="${error!=null}">
+	 _______________________________________________________________________________<br>
+</c:if>
 <sec:authorize access="hasRole('ROLE_OJT')" >OJT<br></sec:authorize>
 <sec:authorize access="hasRole('ROLE_STATIC')" >STATIC<br></sec:authorize>
 <sec:authorize access="hasRole('ROLE_ADMIN')" >Admin<br></sec:authorize>

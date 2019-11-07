@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -29,10 +31,16 @@ public class AboutDAO {
 	NamedParameterJdbcTemplate jdbc;
 	@Autowired
 	AboutModel mod;
-
+	
 	@Autowired
 	public void setJdbc(DataSource jdbc) {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
+	}
+	@Autowired
+	public SessionFactory sessionFactory;
+	
+	public Session getSession() {
+		return sessionFactory.getCurrentSession();
 	}
 
 	// retrievelist with static data from properties
@@ -58,10 +66,14 @@ public class AboutDAO {
 	}
 	
 	// retrievelist using custom rowMapper
+	@SuppressWarnings("unchecked")
 	public List<AboutModel> getModels() {
-
-		return jdbc.query("select * from about order by sequence asc", new AboutRowMapper(mod));
-
+		
+		//lowerlevelway
+		//return jdbc.query("select * from about order by sequence asc", new AboutRowMapper(mod));
+		
+		//hibernateway
+		return getSession().createQuery("from AboutModel").list();
 	}
 
 	// retrievelist using BeanPropertyRowMapper

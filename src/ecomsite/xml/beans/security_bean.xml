@@ -20,14 +20,14 @@
 		</security:authentication-provider>
 		<security:authentication-provider>
 			<security:jdbc-user-service
-			id="jdbcprovider"
-				data-source-ref="dataSource"
+				id="jdbcprovider" data-source-ref="dataSource"
 				authorities-by-username-query="select username, authority from authorities where username = ?"
 				users-by-username-query="select username, password, enabled from users where username = ?" />
-			<security:password-encoder base64="false" hash="md5"></security:password-encoder>
+			<security:password-encoder base64="false"
+				hash="md5"></security:password-encoder>
 		</security:authentication-provider>
 
-		
+
 	</security:authentication-manager>
 
 
@@ -35,10 +35,12 @@
 
 		<security:intercept-url pattern="/logs"
 			access="hasRole('admin')" />
-			
-			<security:intercept-url pattern="/authority"
+
+		<security:intercept-url pattern="/authority"
 			access="permitAll" />
-			<security:intercept-url pattern="/logged_out"
+		<security:intercept-url pattern="/error"
+			access="permitAll" />
+		<security:intercept-url pattern="/logged_out"
 			access="permitAll" />
 
 		<security:intercept-url
@@ -46,7 +48,7 @@
 
 		<security:intercept-url pattern="/about"
 			access="isAuthenticated()" />
-
+		
 		<security:intercept-url pattern="/"
 			access="isAuthenticated()" />
 
@@ -57,11 +59,14 @@
 			access="denyAll" />
 
 
-	
-		 <security:form-login login-page="/authority" login-processing-url="/j_spring_security_check" 
-	authentication-failure-url="/authority?error=true" password-parameter="j_password" 
-	username-parameter="j_username" always-use-default-target="true" />
-		<security:access-denied-handler error-page="/access_denied" />
+
+		<security:form-login login-page="/authority"
+			login-processing-url="/j_spring_security_check"
+			authentication-failure-url="/authority?error=true"
+			password-parameter="j_password" username-parameter="j_username"
+			always-use-default-target="true" />
+		<security:access-denied-handler
+			error-page="/access_denied" />
 
 		<!-- <security:access-denied-handler error-page="access_denied" /> -->
 		<security:remember-me use-secure-cookie="true"

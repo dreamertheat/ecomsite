@@ -34,14 +34,15 @@ public class AboutController {
 		super();
 		this.service = service;
 	}
-
+	
+	
+	//create, read, update, delete
 	@RequestMapping(value = "/about", params = { "layer" })
 	public synchronized ModelAndView about(@Valid @ModelAttribute AboutModel aboutModel, BindingResult result, Principal principal,
-			ModelMap model, @RequestParam(value = "layer") String layer, HttpServletRequest request) {
+			ModelMap model, @RequestParam(value = "layer", required=false) String layer, HttpServletRequest request) {
 		
 		if (result.hasErrors()) {
 			System.out.println("errors " + result.getErrorCount());
-			// return new ModelAndView("error");
 		}
 		//attribute for add and delete
 		if (layer.equalsIgnoreCase("main")||layer.equalsIgnoreCase("add_about")||layer.contains("delete_about")) {
@@ -58,7 +59,7 @@ public class AboutController {
 				System.out.println(e);
 			}
 		}
-		// handle delete
+		// handle delete 
 		if (layer.contains("delete_about")) {
 			System.out.println("deletion!");
 			try {
@@ -142,4 +143,6 @@ public class AboutController {
 		model.addAttribute("authenticated",principal.getName());
 		return view;
 	}
+	
+		
 }
