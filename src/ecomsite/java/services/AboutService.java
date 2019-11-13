@@ -43,6 +43,12 @@ public class AboutService {
 	}
 	
 	@Secured("ROLE_ADMIN")
+	public int[] createAbout(List<AboutModel> models) {
+
+		return aboutdao.createAboutFromList(models);
+	}
+	
+	@Secured("ROLE_ADMIN")
 	public int deleteAbout(int id) {
 		return aboutdao.deleteAbout(id);
 	}

@@ -1,32 +1,24 @@
 package ecomsite.java.dbmodels;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
-@Transactional //for transactional
-@Entity //javax persistence for hibernate bean
-@Table(name="about") //javax persistence for hibernate table name
-public class AboutModel implements Serializable {
+//@Transactional //for transactional
+//@Entity //javax persistence for hibernate bean
+//@Table(name="about") //javax persistence for hibernate table name
+public class AboutModel {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 729678249666320770L;
 
-	@Id //hibernate annotation for primary key
-	@Column(name="_id") //hibernate annotation for column name
+	//@Id //hibernate annotation for primary key
+	//@Column(name="_id") //hibernate annotation for column name
 	private int _id;
 	
 
@@ -54,6 +46,13 @@ public class AboutModel implements Serializable {
 		this.corporation = corporation;
 		this.about = about;
 	}
+	
+	public AboutModel(String name, String description, String date, int sequence) {
+		this.name = name;
+		this.description = description;
+		this.date = date;
+		this.sequence = sequence;
+		}
 	
 	public AboutModel() {
 	}

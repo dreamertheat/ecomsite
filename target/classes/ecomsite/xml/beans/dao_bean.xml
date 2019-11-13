@@ -48,7 +48,7 @@
 			id="dataSource" expected-type="javax.sql.DataSource">
 
 		</jee:jndi-lookup>
-	<bean id="sessionFactory"
+<!-- 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="hibernateProperties">
@@ -61,6 +61,6 @@
 				<value>ecomsite.java.dbmodels</value>
 			</list>
 		</property>
-	</bean>
+	</bean> -->
 	</beans>
 </beans>
