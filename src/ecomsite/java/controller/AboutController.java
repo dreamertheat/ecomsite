@@ -16,12 +16,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ecomsite.java.dbmodels.AboutModel;
+import ecomsite.java.dbmodels.FormValidationGroup;
 import ecomsite.java.services.AboutService;
 
 @Controller
@@ -38,7 +40,7 @@ public class AboutController {
 	
 	//create, read, update, delete
 	@RequestMapping(value = "/about", params = { "layer" })
-	public synchronized ModelAndView about(@Valid @ModelAttribute AboutModel aboutModel, BindingResult result, Principal principal,
+	public synchronized ModelAndView about(@Validated(FormValidationGroup.class) @ModelAttribute AboutModel aboutModel, BindingResult result, Principal principal,
 			ModelMap model, @RequestParam(value = "layer", required=false) String layer, HttpServletRequest request) {
 		
 		if (result.hasErrors()) {

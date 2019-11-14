@@ -27,7 +27,7 @@ import ecomsite.java.services.AboutService;
 		"classpath:/ecomsite/config/dao_bean_test.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AboutDBTest {
-
+	
 	@Autowired
 	DataSource ds;
 	@Autowired
@@ -57,7 +57,7 @@ public class AboutDBTest {
 		
 		//retrieve
 		List<AboutModel> am = about.getModels();
-		assertEquals("Test from UserDBTest", 5, am.size());
+		assertEquals("Test from UserDBTest", 0, am.size());
 		assertEquals("test",1,1);
 		
 	}

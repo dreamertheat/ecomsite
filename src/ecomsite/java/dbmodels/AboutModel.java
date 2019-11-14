@@ -1,24 +1,30 @@
 package ecomsite.java.dbmodels;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 
 @Component
-//@Transactional //for transactional
-//@Entity //javax persistence for hibernate bean
-//@Table(name="about") //javax persistence for hibernate table name
+@Transactional //for transactional
+@Entity //javax persistence for hibernate bean
+@Table(name="about") //javax persistence for hibernate table name
 public class AboutModel {
 
 	/**
 	 * 
 	 */
 
-	//@Id //hibernate annotation for primary key
-	//@Column(name="_id") //hibernate annotation for column name
+	@Id //hibernate annotation for primary key
+	@Column(name="_id") //hibernate annotation for column name
 	private int _id;
 	
 
@@ -27,11 +33,11 @@ public class AboutModel {
 	private int sequence;
 
 	private String corporation;
-
+	
 	private String about;
 	
-	@NotNull
-	@Size(min=5, max=100)
+	@NotNull(groups={FormValidationGroup.class, PersistenceValidationGroup.class})
+	@Size(min=5, max=100, groups={FormValidationGroup.class, PersistenceValidationGroup.class})
 	private String name;
 	
 	

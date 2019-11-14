@@ -1,9 +1,17 @@
 package ecomsite.java.dbmodels;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+
 public class UsersModel {
 	
 	private int _id;
+	@NotNull(groups={FormValidationGroup.class, PersistenceValidationGroup.class})
+	@Size(min=5, max=100, groups={FormValidationGroup.class, PersistenceValidationGroup.class})
 	private String first_name;
+	@NotNull(groups={FormValidationGroup.class, PersistenceValidationGroup.class})
+	@Size(min=5, max=100, groups={FormValidationGroup.class, PersistenceValidationGroup.class})
 	private String last_name;
 	private String address;
 	private String birthdate;
