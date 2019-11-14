@@ -26,61 +26,70 @@ import ecomsite.java.custom.AboutRowMapper;
 import ecomsite.java.dbmodels.AboutModel;
 
 @Component
+@Transactional
 public class AboutDAO {
 
 	NamedParameterJdbcTemplate jdbc;
 	@Autowired
 	AboutModel mod;
-	
+
 	@Autowired
 	public void setJdbc(DataSource jdbc) {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
+
+	// hibernate
 	
-	//hibernate
-	/*
-	 * @Autowired public SessionFactory sessionFactory;
-	 * 
-	 * public Session getSession() { return sessionFactory.getCurrentSession(); }
-	 */
+	
+	@Autowired
+	public SessionFactory sessionFactory;
+
+	public Session getSession() {
+		return sessionFactory.getCurrentSession();
+	}
 
 	// retrievelist with static data from properties
 	public List<AboutModel> getModelsOld() {
 
-		return jdbc.query("select * from about order by sequence asc", new RowMapper<AboutModel>() {
+		return jdbc.query("select * from about order by sequence asc",
+				new RowMapper<AboutModel>() {
 
-			@Override
-			public AboutModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-				AboutModel ad = new AboutModel();
+					@Override
+					public AboutModel mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						AboutModel ad = new AboutModel();
 
-				ad.set_id(rs.getInt(1));
-				ad.setName(rs.getString(2));
-				ad.setDescription(rs.getString(3));
-				ad.setSequence(rs.getInt(4));
-				ad.setDate(rs.getString(5));
-				ad.setCorporation(mod.getCorporation());
-				ad.setAbout(mod.getAbout());
-				return ad;
-			}
-		});
+						ad.set_id(rs.getInt(1));
+						ad.setName(rs.getString(2));
+						ad.setDescription(rs.getString(3));
+						ad.setSequence(rs.getInt(4));
+						ad.setDate(rs.getString(5));
+						ad.setCorporation(mod.getCorporation());
+						ad.setAbout(mod.getAbout());
+						return ad;
+					}
+				});
 
 	}
-	
+
 	// retrievelist using custom rowMapper
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<AboutModel> getModels() {
-		
-		//lowerlevelway
-		return jdbc.query("select * from about order by sequence asc", new AboutRowMapper(mod));
-		
-		//hibernateway
-		//return getSession().createQuery("from AboutModel").list();
+
+		// lowerlevelway
+		// return jdbc.query("select * from about order by sequence asc", new
+		// AboutRowMapper(mod));
+
+		// hibernateway
+		return getSession().createQuery("from ecomsite.java.dbmodels.AboutModel A").list();
 	}
 
 	// retrievelist using BeanPropertyRowMapper
 	public List<AboutModel> getModelsBP() {
 
-		return jdbc.query("select * from about", BeanPropertyRowMapper.newInstance(AboutModel.class));
+		return jdbc.query("select * from about",
+				BeanPropertyRowMapper.newInstance(AboutModel.class));
 
 	}
 
@@ -94,30 +103,34 @@ public class AboutDAO {
 
 	// update via Object or bean if you have one as parameter thus use
 	public int updateAbout(AboutModel about) {
-		BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(about);
-		System.out.println("sequence debug ua2 "+about.getSequence());
+		BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(
+				about);
+		System.out.println("sequence debug ua2 " + about.getSequence());
 
-		return jdbc.update(
-				"update about set name=:name, description=:description, sequence=:sequence, date=:date where _id=:_id",
-				map);
+		return jdbc
+				.update("update about set name=:name, description=:description, sequence=:sequence, date=:date where _id=:_id",
+						map);
 	}
 
 	// batch update having pojo list
 	@Transactional
 	public int[] createAboutFromList(List<AboutModel> aboutList) {
-		SqlParameterSource[] source = SqlParameterSourceUtils.createBatch(aboutList.toArray());
-		return jdbc.batchUpdate(
-				"insert into about (name, description, sequence, date) values (:name, :description, :sequence, :date)",
-				source);
+		SqlParameterSource[] source = SqlParameterSourceUtils
+				.createBatch(aboutList.toArray());
+		return jdbc
+				.batchUpdate(
+						"insert into about (name, description, sequence, date) values (:name, :description, :sequence, :date)",
+						source);
 	}
 
 	public int createAbout(AboutModel model) {
-		model.setDate(new SimpleDateFormat("MMM/dd/yyyy hh:mm:ss").format(new Date()));
-		BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(model);
-		return jdbc.update(
-				"insert into about (name, description, sequence, date) values (:name, :description, :sequence, :date)",
-				map);
+		model.setDate(new SimpleDateFormat("MMM/dd/yyyy hh:mm:ss")
+				.format(new Date()));
+		BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(
+				model);
+		return jdbc
+				.update("insert into about (name, description, sequence, date) values (:name, :description, :sequence, :date)",
+						map);
 	}
 
-	
 }

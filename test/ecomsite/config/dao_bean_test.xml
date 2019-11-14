@@ -39,7 +39,7 @@
 			</property>
 			<property name="packagesToScan">
 				<list>
-					<value>ecomsite.java.dbmodels.DAO</value>
+					<value>ecomsite.java.dbmodels</value>
 				</list>
 			</property>
 		</bean>

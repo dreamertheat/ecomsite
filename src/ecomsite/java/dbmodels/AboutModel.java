@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,13 +28,15 @@ public class AboutModel {
 	@Column(name="_id") //hibernate annotation for column name
 	private int _id;
 	
-
+	@Column(name="description")
 	private String description;
+	@Column(name="date")
 	private String date;
+	@Column(name="sequence")
 	private int sequence;
-
+	@Transient
 	private String corporation;
-	
+	@Transient
 	private String about;
 	
 	@NotNull(groups={FormValidationGroup.class, PersistenceValidationGroup.class})
@@ -122,14 +125,73 @@ public class AboutModel {
 		return sequence;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + _id;
+		result = prime * result + ((about == null) ? 0 : about.hashCode());
+		result = prime * result
+				+ ((corporation == null) ? 0 : corporation.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + sequence;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AboutModel other = (AboutModel) obj;
+		if (_id != other._id)
+			return false;
+		if (about == null) {
+			if (other.about != null)
+				return false;
+		} else if (!about.equals(other.about))
+			return false;
+		if (corporation == null) {
+			if (other.corporation != null)
+				return false;
+		} else if (!corporation.equals(other.corporation))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (sequence != other.sequence)
+			return false;
+		return true;
+	}
+
 	public void setSequence(int sequence) {
 		this.sequence = sequence;
 	}
 
 	@Override
 	public String toString() {
-		return "AboutModel [_id=" + _id + ", name=" + name + ", description=" + description + ", date=" + date
-				+ ", sequence=" + sequence + "]";
+		return "AboutModel [_id=" + _id + ", description=" + description
+				+ ", date=" + date + ", sequence=" + sequence
+				+ ", corporation=" + corporation + ", about=" + about
+				+ ", name=" + name + "]";
 	}
 
 }
